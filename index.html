@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 </head>
 <body>
-    dsds
     <div
     class="box box-2"
     >
@@ -43,6 +42,9 @@
                 <td colspan="2" class="button" data-value="=">=</td>
                 <td class="button" data-value="0" >0</td>
                 <td class="button" data-value="/">/</td>
+                <td class="button" data-value="%">%</td>
+                
+
             </tr>
         </tbody>
        </table>
@@ -73,11 +75,11 @@ var myFunction = function() {
     }
 
 
-    if(!["+","-","x","/"].includes(attribute) && !operation){
+    if(!["+","-","x","/","%"].includes(attribute) && !operation){
         first_input += attribute
-    } else if(!operation && ["+","-","x","/"].includes(attribute)){
+    } else if(!operation && ["+","-","x","/","%"].includes(attribute)){
         operation = attribute;
-    } else if(operation && !["+","-","x","/"].includes(attribute)) {
+    } else if(operation && !["+","-","x","/","%"].includes(attribute)) {
         second_input += attribute;
     }
     if(attribute=="="){
@@ -85,6 +87,13 @@ var myFunction = function() {
               document.getElementById("input").innerHTML = parseInt(first_input) + parseInt(second_input);
             else if(operation==="-")
               document.getElementById("input").innerHTML = parseInt(first_input) - parseInt(second_input);
+              else if(operation==="x")
+              document.getElementById("input").innerHTML = parseInt(first_input) * parseInt(second_input);
+              else if(operation==="/")
+              document.getElementById("input").innerHTML = parseInt(first_input) / parseInt(second_input);
+              else if(operation==="%")
+              document.getElementById("input").innerHTML = parseInt(first_input) % parseInt(second_input);
+              
               first_input =""
               second_input =""
               operation =""
