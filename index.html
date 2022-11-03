@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+</head>
+<body>
+    <div
+    class="box"
+    >
+       <table class="table is-bordered">
+        <tbody>
+            <tr>
+                <td colspan="4" style="height: 30px" id="input"></td>
+            </tr>
+            <tr>
+                <td class="button" data-value="c">C</td>
+                <td colspan="3"></td>
+            </tr>
+            <tr>
+                <td class="button" data-value="1">1</td>
+                <td class="button" data-value="2">2</td>
+                <td class="button" data-value="3">3</td>
+                <td class="button" data-value="+">+</td>
+            </tr>
+            <tr>
+                <td class="button" data-value="4">4</td>
+                <td class="button" data-value="5">5</td>
+                <td class="button" data-value="6">6</td>
+                <td class="button" data-value="-">-</td>
+            </tr>
+            <tr>
+                <td class="button" data-value="7">7</td>
+                <td class="button" data-value="8">8</td>
+                <td class="button" data-value="9">9</td>
+                <td class="button" data-value="x">x</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="button" data-value="=">=</td>
+                <td class="button" data-value="0" >0</td>
+                <td class="button" data-value="/">/</td>
+            </tr>
+        </tbody>
+       </table>
+    </div>
+
+</body>
+<script>
+
+
+var first_input = "";    
+var second_input = "";    
+var operation = "";    
+
+var elements = document.getElementsByClassName("button");
+
+
+
+var myFunction = function() {
+    var attribute = this.getAttribute("data-value");
+
+    if(attribute=="c"){
+        first_input =""
+              second_input =""
+              operation =""
+            document.getElementById("input").innerHTML = ""
+
+              return;
+    }
+
+
+    if(!["+","-","x","/"].includes(attribute) && !operation){
+        first_input += attribute
+    } else if(!operation && ["+","-","x","/"].includes(attribute)){
+        operation = attribute;
+    } else if(operation && !["+","-","x","/"].includes(attribute)) {
+        second_input += attribute;
+    }
+    if(attribute=="="){
+            if(operation==="+")
+              document.getElementById("input").innerHTML = parseInt(first_input) + parseInt(second_input);
+            else if(operation==="-")
+              document.getElementById("input").innerHTML = parseInt(first_input) - parseInt(second_input);
+              first_input =""
+              second_input =""
+              operation =""
+    } else { 
+            document.getElementById("input").innerHTML = first_input+operation+second_input
+    }
+
+
+    // alert(attribute);
+};
+
+for (var i = 0; i < elements.length; i++) {
+    elements[i].addEventListener('click', myFunction, false);
+}
+    
+</script>
+</html>
